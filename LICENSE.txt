@@ -1,0 +1,1 @@
+These files and fonts may be used for testing Fontmake and other open-source font build tools.

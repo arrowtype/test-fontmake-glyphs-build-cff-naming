@@ -1,0 +1,593 @@
+{
+.appVersion = "3260";
+.formatVersion = 3;
+axes = (
+{
+name = Weight;
+tag = wght;
+},
+{
+name = Width;
+tag = wdth;
+}
+);
+date = "2024-07-11 19:42:58 +0000";
+familyName = Familyname;
+fontMaster = (
+{
+axesValues = (
+400,
+50
+);
+customParameters = (
+{
+name = "Axis Location";
+value = (
+{
+Axis = Weight;
+Location = 400;
+},
+{
+Axis = Width;
+Location = 50;
+}
+);
+}
+);
+iconName = Condensed;
+id = m01;
+metricValues = (
+{
+over = 16;
+pos = 800;
+},
+{
+over = -16;
+},
+{
+over = -16;
+pos = -200;
+},
+{
+over = 16;
+pos = 700;
+}
+);
+name = "Condensed Regular";
+},
+{
+axesValues = (
+700,
+50
+);
+customParameters = (
+{
+name = "Axis Location";
+value = (
+{
+Axis = Weight;
+Location = 700;
+},
+{
+Axis = Width;
+Location = 50;
+}
+);
+}
+);
+iconName = Bold_Condensed;
+id = m003;
+metricValues = (
+{
+over = 16;
+pos = 800;
+},
+{
+over = -16;
+},
+{
+over = -16;
+pos = -200;
+},
+{
+over = 16;
+pos = 700;
+}
+);
+name = "Condensed Bold";
+},
+{
+axesValues = (
+400,
+100
+);
+customParameters = (
+{
+name = "Axis Location";
+value = (
+{
+Axis = Weight;
+Location = 400;
+},
+{
+Axis = Width;
+Location = 100;
+}
+);
+}
+);
+id = m002;
+metricValues = (
+{
+over = 16;
+pos = 800;
+},
+{
+over = -16;
+},
+{
+over = -16;
+pos = -200;
+},
+{
+over = 16;
+pos = 700;
+}
+);
+name = Regular;
+},
+{
+axesValues = (
+700,
+100
+);
+customParameters = (
+{
+name = "Axis Location";
+value = (
+{
+Axis = Weight;
+Location = 400;
+},
+{
+Axis = Width;
+Location = 100;
+}
+);
+}
+);
+iconName = Bold;
+id = m004;
+metricValues = (
+{
+over = 16;
+pos = 800;
+},
+{
+over = -16;
+},
+{
+over = -16;
+pos = -200;
+},
+{
+over = 16;
+pos = 700;
+}
+);
+name = Bold;
+}
+);
+glyphs = (
+{
+glyphname = A;
+lastChange = "2024-07-11 19:54:42 +0000";
+layers = (
+{
+layerId = m01;
+shapes = (
+{
+closed = 1;
+nodes = (
+(30,0,l),
+(119,0,l),
+(244,700,l),
+(165,700,l)
+);
+},
+{
+closed = 1;
+nodes = (
+(210,700,l),
+(334,0,l),
+(434,0,l),
+(299,700,l)
+);
+},
+{
+closed = 1;
+nodes = (
+(111,139,l),
+(337,139,l),
+(337,214,l),
+(111,214,l)
+);
+}
+);
+width = 464;
+},
+{
+layerId = m002;
+shapes = (
+{
+closed = 1;
+nodes = (
+(50,0,l),
+(149,0,l),
+(374,700,l),
+(285,700,l)
+);
+},
+{
+closed = 1;
+nodes = (
+(320,700,l),
+(544,0,l),
+(654,0,l),
+(419,700,l)
+);
+},
+{
+closed = 1;
+nodes = (
+(155,139,l),
+(533,139,l),
+(533,224,l),
+(155,224,l)
+);
+}
+);
+width = 704;
+},
+{
+layerId = m003;
+shapes = (
+{
+closed = 1;
+nodes = (
+(15,0,l),
+(184,0,l),
+(256,700,l),
+(110,700,l)
+);
+},
+{
+closed = 1;
+nodes = (
+(221,700,l),
+(293,0,l),
+(473,0,l),
+(378,700,l)
+);
+},
+{
+closed = 1;
+nodes = (
+(123,115,l),
+(349,115,l),
+(349,238,l),
+(123,238,l)
+);
+}
+);
+width = 488;
+},
+{
+layerId = m004;
+shapes = (
+{
+closed = 1;
+nodes = (
+(10,0,l),
+(279,0,l),
+(457,700,l),
+(209,700,l)
+);
+},
+{
+closed = 1;
+nodes = (
+(332,700,l),
+(510,0,l),
+(806,0,l),
+(605,700,l)
+);
+},
+{
+closed = 1;
+nodes = (
+(169,111,l),
+(622,111,l),
+(622,272,l),
+(169,272,l)
+);
+}
+);
+width = 816;
+}
+);
+metricRight = "=|";
+unicode = 65;
+},
+{
+glyphname = space;
+lastChange = "2024-07-11 19:56:16 +0000";
+layers = (
+{
+layerId = m01;
+width = 200;
+},
+{
+layerId = m002;
+width = 300;
+},
+{
+layerId = m003;
+width = 200;
+},
+{
+layerId = m004;
+width = 300;
+}
+);
+unicode = 32;
+}
+);
+instances = (
+{
+axesValues = (
+400,
+50
+);
+customParameters = (
+{
+name = "Axis Location";
+value = (
+{
+Axis = Weight;
+Location = 400;
+},
+{
+Axis = Width;
+Location = 50;
+}
+);
+},
+{
+name = fileName;
+value = "FamilynameCondensed-Regular";
+}
+);
+instanceInterpolations = {
+m01 = 1;
+};
+name = "Condensed Regular";
+properties = (
+{
+key = familyNames;
+values = (
+{
+language = dflt;
+value = "Familyname Condensed";
+}
+);
+},
+{
+key = styleNames;
+values = (
+{
+language = dflt;
+value = Regular;
+}
+);
+}
+);
+},
+{
+axesValues = (
+550,
+50
+);
+customParameters = (
+{
+name = "Axis Location";
+value = (
+{
+Axis = Weight;
+Location = 500;
+},
+{
+Axis = Width;
+Location = 50;
+}
+);
+},
+{
+name = fileName;
+value = "FamilynameCondensed-Medium";
+}
+);
+instanceInterpolations = {
+m003 = 0.5;
+m01 = 0.5;
+};
+name = "Condensed Medium";
+properties = (
+{
+key = familyNames;
+values = (
+{
+language = dflt;
+value = "Familyname Condensed";
+}
+);
+},
+{
+key = styleNames;
+values = (
+{
+language = dflt;
+value = Medium;
+}
+);
+}
+);
+},
+{
+axesValues = (
+700,
+50
+);
+customParameters = (
+{
+name = "Axis Location";
+value = (
+{
+Axis = Weight;
+Location = 700;
+},
+{
+Axis = Width;
+Location = 50;
+}
+);
+},
+{
+name = fileName;
+value = "FamilynameCondensed-Bold";
+}
+);
+instanceInterpolations = {
+m003 = 1;
+};
+isBold = 1;
+linkStyle = Regular;
+name = "Condensed Bold";
+properties = (
+{
+key = familyNames;
+values = (
+{
+language = dflt;
+value = "Familyname Condensed";
+}
+);
+},
+{
+key = styleNames;
+values = (
+{
+language = dflt;
+value = Bold;
+}
+);
+}
+);
+},
+{
+axesValues = (
+400,
+100
+);
+customParameters = (
+{
+name = "Axis Location";
+value = (
+{
+Axis = Weight;
+Location = 400;
+},
+{
+Axis = Width;
+Location = 100;
+}
+);
+}
+);
+instanceInterpolations = {
+m002 = 1;
+};
+name = Regular;
+},
+{
+axesValues = (
+550,
+100
+);
+customParameters = (
+{
+name = "Axis Location";
+value = (
+{
+Axis = Weight;
+Location = 500;
+},
+{
+Axis = Width;
+Location = 100;
+}
+);
+}
+);
+instanceInterpolations = {
+m002 = 0.5;
+m004 = 0.5;
+};
+name = Medium;
+},
+{
+axesValues = (
+700,
+100
+);
+customParameters = (
+{
+name = "Axis Location";
+value = (
+{
+Axis = Weight;
+Location = 700;
+},
+{
+Axis = Width;
+Location = 100;
+}
+);
+}
+);
+instanceInterpolations = {
+m004 = 1;
+};
+isBold = 1;
+linkStyle = Regular;
+name = Bold;
+}
+);
+metrics = (
+{
+type = ascender;
+},
+{
+type = baseline;
+},
+{
+type = descender;
+},
+{
+type = "cap height";
+}
+);
+unitsPerEm = 1000;
+versionMajor = 1;
+versionMinor = 0;
+}
