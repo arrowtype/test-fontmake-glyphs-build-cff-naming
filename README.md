@@ -1,12 +1,14 @@
 # Test: FontMake, a Glyphs source, a Width axis, and naming issues
 
+Made for (FontMake Issue #1108)[https://github.com/googlefonts/fontmake/issues/1108].
+
 Can FontMake produce accurate static OTFs and variable TTFs, with a width axis, from a single Glyphs source?
 
 I’ve attempted to set up a GlyphsApp source with:
 - A Weight axis
 - A Width axis
-- Exports/instances that will output different sub families in static fonts – one per main width location
-- Export/instance data that will produce desired instance names in a variable font
+- Instances that will output different sub-families in static fonts – one per main width location, like `Familyname` and `Familyname Condensed`, as is typical for weight+width superfamilies.
+- Instances that will produce desired instance names in a variable font, including width descriptors
 
 Main problem:
 - If I set Glyphs data to produce accurate variable TTF instance naming, like `Condensed Medium`, the CFF table of OTFs gets duplicated width desriptors, like `FamilynameCondensed-CondensedMedium`
