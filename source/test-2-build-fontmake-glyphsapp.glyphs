@@ -366,6 +366,18 @@ Location = 50;
 {
 name = fileName;
 value = "FamilynameCondensed-Regular";
+},
+{
+name = "Name Table Entry";
+value = "1; Familyname Condensed";
+},
+{
+name = "Name Table Entry";
+value = "4; Familyname Condensed Regular";
+},
+{
+name = "Name Table Entry";
+value = "3; 1.000;NONE;FamilynameCondensed-Regular";
 }
 );
 instanceInterpolations = {
@@ -416,6 +428,18 @@ Location = 50;
 {
 name = fileName;
 value = "FamilynameCondensed-Medium";
+},
+{
+name = "Name Table Entry";
+value = "1; Familyname Condensed Medium";
+},
+{
+name = "Name Table Entry";
+value = "4; Familyname Condensed Medium";
+},
+{
+name = "Name Table Entry";
+value = "3; 1.000;NONE;FamilynameCondensed-Medium";
 }
 );
 instanceInterpolations = {
@@ -468,6 +492,18 @@ Location = 50;
 {
 name = fileName;
 value = "FamilynameCondensed-Bold";
+},
+{
+name = "Name Table Entry";
+value = "1; Familyname Condensed";
+},
+{
+name = "Name Table Entry";
+value = "4; Familyname Condensed Bold";
+},
+{
+name = "Name Table Entry";
+value = "3; 1.000;NONE;FamilynameCondensed-Bold";
 }
 );
 instanceInterpolations = {

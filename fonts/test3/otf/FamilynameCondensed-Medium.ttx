@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ttFont sfntVersion="OTTO" ttLibVersion="4.49">
+
+  <name>
+    <namerecord nameID="1" platformID="3" platEncID="1" langID="0x409">
+      Familyname Condensed Medium
+    </namerecord>
+    <namerecord nameID="2" platformID="3" platEncID="1" langID="0x409">
+      Regular
+    </namerecord>
+    <namerecord nameID="3" platformID="3" platEncID="1" langID="0x409">
+      1.000;NONE;FamilynameCondensed-Medium
+    </namerecord>
+    <namerecord nameID="4" platformID="3" platEncID="1" langID="0x409">
+      Familyname Condensed Medium
+    </namerecord>
+    <namerecord nameID="5" platformID="3" platEncID="1" langID="0x409">
+      Version 1.000
+    </namerecord>
+    <namerecord nameID="6" platformID="3" platEncID="1" langID="0x409">
+      FamilynameCondensed-Medium
+    </namerecord>
+    <namerecord nameID="16" platformID="3" platEncID="1" langID="0x409">
+      Familyname Condensed
+    </namerecord>
+    <namerecord nameID="17" platformID="3" platEncID="1" langID="0x409">
+      Medium
+    </namerecord>
+  </name>
+
+  <CFF>
+    <major value="1"/>
+    <minor value="0"/>
+    <CFFFont name="FamilynameCondensed-Medium">
+      <version value="1.0"/>
+      <FullName value="Familyname Condensed Medium"/>
+      <FamilyName value="Familyname Condensed"/>
+      <Weight value="Semi-bold"/>
+      <isFixedPitch value="0"/>
+      <ItalicAngle value="0"/>
+      <UnderlinePosition value="-100"/>
+      <UnderlineThickness value="50"/>
+      <PaintType value="0"/>
+      <CharstringType value="2"/>
+      <FontMatrix value="0.001 0 0 0.001 0 0"/>
+      <FontBBox value="23 -200 454 800"/>
+      <StrokeWidth value="0"/>
+      <!-- charset is dumped separately as the 'GlyphOrder' element -->
+      <Encoding>
+      </Encoding>
+      <Private>
+        <BlueValues value="-16 0 700 716 800 816"/>
+        <OtherBlues value="-216 -200"/>
+        <BlueScale value="0.046875"/>
+        <BlueShift value="7"/>
+        <BlueFuzz value="0"/>
+        <ForceBold value="0"/>
+        <LanguageGroup value="0"/>
+        <ExpansionFactor value="0.06"/>
+        <initialRandomSeed value="0"/>
+        <defaultWidthX value="0"/>
+        <nominalWidthX value="0"/>
+      </Private>
+      <CharStrings>
+        <CharString name=".notdef">
+          500 50 -200 rmoveto
+          400 1000 -400 -1000 hlineto
+          50 50 rmoveto
+          900 300 -900 -300 vlineto
+          endchar
+        </CharString>
+        <CharString name="A">
+          476 138 700 rmoveto
+          -115 -700 rlineto
+          129 hlineto
+          17 127 rlineto
+          127 hlineto
+          18 -127 rlineto
+          140 hlineto
+          -115 700 rlineto
+          -156 -474 rmoveto
+          50 351 49 -351 rlineto
+          endchar
+        </CharString>
+        <CharString name="space">
+          200 endchar
+        </CharString>
+      </CharStrings>
+    </CFFFont>
+
+    <GlobalSubrs>
+      <!-- The 'index' attribute is only for humans; it is ignored when parsed. -->
+    </GlobalSubrs>
+  </CFF>
+
+</ttFont>
