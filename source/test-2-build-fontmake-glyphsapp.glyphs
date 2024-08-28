@@ -378,6 +378,14 @@ value = "4; Familyname Condensed Regular";
 {
 name = "Name Table Entry";
 value = "3; 1.000;NONE;FamilynameCondensed-Regular";
+},
+{
+name = "Name Table Entry";
+value = "6; FamilynameCondensed-Regular";
+},
+{
+name = "Name Table Entry";
+value = "17; Regular";
 }
 );
 instanceInterpolations = {
@@ -440,6 +448,14 @@ value = "4; Familyname Condensed Medium";
 {
 name = "Name Table Entry";
 value = "3; 1.000;NONE;FamilynameCondensed-Medium";
+},
+{
+name = "Name Table Entry";
+value = "6; FamilynameCondensed-Medium";
+},
+{
+name = "Name Table Entry";
+value = "17; Medium";
 }
 );
 instanceInterpolations = {
@@ -504,6 +520,14 @@ value = "4; Familyname Condensed Bold";
 {
 name = "Name Table Entry";
 value = "3; 1.000;NONE;FamilynameCondensed-Bold";
+},
+{
+name = "Name Table Entry";
+value = "6; FamilynameCondensed-Bold";
+},
+{
+name = "Name Table Entry";
+value = "17; Bold";
 }
 );
 instanceInterpolations = {

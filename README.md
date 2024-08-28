@@ -73,9 +73,29 @@ Versions:
 
 ## Reproduction
 
-Set up a venv if you want, and install FontMake.
+Set up a venv if you want, and install FontMake, then run the following test builds.
 
 ### Test 1: Basic problem
+
+The source `source/test-1-build-fontmake-glyphsapp.glyphs` is set up with:
+- Two characters: /A and /space
+- Width & Weight axes, in 4 masters:
+  - Condensed Regular
+  - Condensed Bold
+  - Regular
+  - Bold
+- Exports for 6 styles:
+  - Condensed Regular
+  - Condensed Medium
+  - Condensed Bold
+  - Regular
+  - Medium
+  - Bold
+- All Masters & Exports include `Axis Location` parameters, which are useful in setting up axis mapping
+- The Condensed styles include two addtional pieces of data in their "General" details:
+  - `Localized Family Names`, which Glyphs describes as: "Font family name. Corresponds to the OpenType name table ID 16 (typographic family name). Used to calculate IDs 1, 3, 4, 6, 16 and 21. OpenType spec: name ID 16"
+  - `Localized Style Names`, which Glyphs describes as: "Style Name or Subfamily Name. Used to calculate OpenType name table IDs 1 and 2, 4, 6, 17 and 22. ‘This string must be unique within a particular typographic family. OpenType spec: name ID 17’"
+- Exports contain `FileName` parameters, to prevent doubled width names in their filenames. Without this, files are generated like `FamilynameCondensed-CondensedMedium.otf`.
 
 Build the Glyphs font with fontmake:
 
@@ -92,20 +112,19 @@ ttx -t fvar -o- fonts/test1/Familyname-VF.ttf
 
 This looks good!
 
-Then, check the `CFF` and `name` tables with TTX:
+Then, check a static font’s `name` tables with TTX:
 
 ```bash
-ttx -t name -t CFF 'fonts/test2/otf/FamilynameCondensed-Medium.otf'
+ttx -t name -o- 'fonts/test2/otf/FamilynameCondensed-Medium.otf'
 ```
 
-This yields some obviously wrong results. Here are snippets:
+Some name entries are as expected, while others are not.
+
+As you can see, the "Condensed" label is repeated in each of the Family/Style pairings:
 
 ```xml
     <namerecord nameID="1" platformID="3" platEncID="1" langID="0x409">
       Familyname Condensed Condensed Medium
-    </namerecord>
-    <namerecord nameID="2" platformID="3" platEncID="1" langID="0x409">
-      Regular
     </namerecord>
     <namerecord nameID="3" platformID="3" platEncID="1" langID="0x409">
       1.000;NONE;FamilynameCondensed-CondensedMedium
@@ -113,24 +132,26 @@ This yields some obviously wrong results. Here are snippets:
     <namerecord nameID="4" platformID="3" platEncID="1" langID="0x409">
       Familyname Condensed Condensed Medium
     </namerecord>
+    <namerecord nameID="6" platformID="3" platEncID="1" langID="0x409">
+      FamilynameCondensed-CondensedMedium
+    </namerecord>
+    <namerecord nameID="16" platformID="3" platEncID="1" langID="0x409">
+      Familyname Condensed
+    </namerecord>
+    <namerecord nameID="17" platformID="3" platEncID="1" langID="0x409">
+      Condensed Medium
+    </namerecord>
 ```
 
-```xml
-    <CFFFont name="FamilynameCondensed-CondensedMedium">
-      <version value="1.0"/>
-      <FullName value="Familyname Condensed Condensed Medium"/>
-      <FamilyName value="Familyname Condensed"/>
-```
+It seems that the FontMake build is respecting the `Localized Family Names`, but ignoring the `Localized Style Names`.
 
+The `name` table records can be corrected with `Name Table Entry` Custom Parameters in the Exports of the Glyphs source. However, these seem to have no impact on the CFF table. Let’s test that.
 
-The `name` table records can be corrected with Custom Properties in the Glyphs source. However, these seem to have no impact on the CFF table. Let’s test that. 
+### Test 2: the problem persists even with Custom Parameters
 
+I thought I could maybe solve this by adding name table ID-specific names to the Exports in my Glyphs source. In Test 2, I’ve added `Name Table Entry` Custom Parameters for nameIDs 1, 3, 4, 6, and 17.
 
-### Test 2: the problem persists even with Custom Properties
-
-I thought I could maybe solve this by adding name table ID-specific names to the Exports in my Glyphs source.
-
-This probably shouldn’t be necessary, as Test 1 already includes `Localized Family Name` and `Localized Style Name` properties of Glyphs Exports. However, it is a natural next step, and it seems worth noting that it doesn’t work as expected.
+This probably shouldn’t be necessary, as Test 1 already includes `Localized Family Name` and `Localized Style Name` properties of Glyphs Exports. However, it is a natural next step, and it seems worth noting that it doesn’t quite work as I had hoped it might.
 
 Build the Glyphs font with fontmake:
 
@@ -150,23 +171,29 @@ This looks good!
 Then, check the `CFF` and `name` tables with TTX:
 
 ```bash
-ttx -t name -t CFF 'fonts/test2/otf/FamilynameCondensed-Medium.otf'
+ttx -t name -t CFF -o- 'fonts/test2/otf/FamilynameCondensed-Medium.otf'
 ```
 
-This yields correct NameIDs 1–4, but the CFF table is still incorrect. Here are snippets:
+This yields correct NameIDs 1–17, but the CFF table is still incorrect. Here are snippets:
 
 ```xml
     <namerecord nameID="1" platformID="3" platEncID="1" langID="0x409">
       Familyname Condensed Medium
-    </namerecord>
-    <namerecord nameID="2" platformID="3" platEncID="1" langID="0x409">
-      Regular
     </namerecord>
     <namerecord nameID="3" platformID="3" platEncID="1" langID="0x409">
       1.000;NONE;FamilynameCondensed-Medium
     </namerecord>
     <namerecord nameID="4" platformID="3" platEncID="1" langID="0x409">
       Familyname Condensed Medium
+    </namerecord>
+    <namerecord nameID="6" platformID="3" platEncID="1" langID="0x409">
+      FamilynameCondensed-Medium
+    </namerecord>
+    <namerecord nameID="16" platformID="3" platEncID="1" langID="0x409">
+      Familyname Condensed
+    </namerecord>
+    <namerecord nameID="17" platformID="3" platEncID="1" langID="0x409">
+      Medium
     </namerecord>
 ```
 
@@ -176,6 +203,8 @@ This yields correct NameIDs 1–4, but the CFF table is still incorrect. Here ar
       <FullName value="Familyname Condensed Condensed Medium"/>
       <FamilyName value="Familyname Condensed"/>
 ```
+
+A valid point I’ve heard on this test is: “Why should ‘Name Table Entries’ affect the CFF table? They are separate tables.” That is fair, but it also seems reasonable to assume that, because the CFF table refers to the font by a `name`, `FullName`, and `FamilyName`, these might be controllable by `Localized Family Name` and `Localized Style Name` properties, or (as a last resort) custom parameters such as `Name Table Entry` (especially because Glyphs offers no custom parameters such as “CFF Name Entry”).
 
 ### Test 3: Correcting static names messes up variable instance names
 
@@ -191,7 +220,7 @@ fontmake -o otf -i -g source/test-3-build-fontmake-glyphsapp.glyphs --output-dir
 Let’s check the `CFF` and `name` tables with TTX:
 
 ```bash
-ttx -t name -t CFF 'fonts/test2/otf/FamilynameCondensed-Medium.otf'
+ttx -t name -t CFF -o- 'fonts/test2/otf/FamilynameCondensed-Medium.otf'
 ```
 
 These both look good:
