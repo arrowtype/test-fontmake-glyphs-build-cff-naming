@@ -75,7 +75,7 @@ Versions:
 
 Set up a venv if you want, and install FontMake, then run the following test builds.
 
-### Test 1: Basic problem
+### Test Setup
 
 The source `source/test-1-build-fontmake-glyphsapp.glyphs` is set up with:
 - Two characters: /A and /space
@@ -96,6 +96,10 @@ The source `source/test-1-build-fontmake-glyphsapp.glyphs` is set up with:
   - `Localized Family Names`, which Glyphs describes as: "Font family name. Corresponds to the OpenType name table ID 16 (typographic family name). Used to calculate IDs 1, 3, 4, 6, 16 and 21. OpenType spec: name ID 16"
   - `Localized Style Names`, which Glyphs describes as: "Style Name or Subfamily Name. Used to calculate OpenType name table IDs 1 and 2, 4, 6, 17 and 22. ‘This string must be unique within a particular typographic family. OpenType spec: name ID 17’"
 - Exports contain `FileName` parameters, to prevent doubled width names in their filenames. Without this, files are generated like `FamilynameCondensed-CondensedMedium.otf`.
+
+Note: this builds as desired (for “Approach 2”) when a Glyphs build is run. However, FontMake offers numerous benefits, so I don’t want to rely on building with Glyphs.
+
+### Test 1: Basic problem
 
 Build the Glyphs font with fontmake:
 
@@ -147,7 +151,7 @@ It seems that the FontMake build is respecting the `Localized Family Names`, but
 
 The `name` table records can be corrected with `Name Table Entry` Custom Parameters in the Exports of the Glyphs source. However, these seem to have no impact on the CFF table. Let’s test that.
 
-### Test 2: the problem persists even with Custom Parameters
+### Test 2: the problem persists even with `Name Table Entry` Custom Parameters
 
 I thought I could maybe solve this by adding name table ID-specific names to the Exports in my Glyphs source. In Test 2, I’ve added `Name Table Entry` Custom Parameters for nameIDs 1, 3, 4, 6, and 17.
 
@@ -204,7 +208,7 @@ This yields correct NameIDs 1–17, but the CFF table is still incorrect. Here a
       <FamilyName value="Familyname Condensed"/>
 ```
 
-A valid point I’ve heard on this test is: “Why should ‘Name Table Entries’ affect the CFF table? They are separate tables.” That is fair, but it also seems reasonable to assume that, because the CFF table refers to the font by a `name`, `FullName`, and `FamilyName`, these might be controllable by `Localized Family Name` and `Localized Style Name` properties, or (as a last resort) custom parameters such as `Name Table Entry` (especially because Glyphs offers no custom parameters such as “CFF Name Entry”).
+A valid critique I’ve heard on this test is, essentially: “Why should ‘Name Table Entry’ parameters affect the CFF table? They are separate tables.” That is fair, but it also seems reasonable to assume that, because the CFF table refers to the font by a `name`, `FullName`, and `FamilyName`, these might be controllable by `Localized Family Name` and `Localized Style Name` properties, or (as a last resort) custom parameters such as `Name Table Entry` (especially because Glyphs offers no custom parameters such as “CFF Name Entry”).
 
 ### Test 3: Correcting static names messes up variable instance names
 
