@@ -1,6 +1,56 @@
-# Test: FontMake, a Glyphs source, a Width axis, and naming issues
+# Test: Can FontMake build from Glyphs to multiple families, static & variable? If not, what is blocking it?
 
-Made for (FontMake Issue #1108)[https://github.com/googlefonts/fontmake/issues/1108].
+[WIP test case for a planned glyphsLib issue]
+
+An earlier, partial issue was filed at [FontMake Issue #1108](https://github.com/googlefonts/fontmake/issues/1108), but this intends to clarify that issue, ultimately as a step towards solving it.
+
+---
+
+## Context and Goals
+
+There are two basic ways of organizing Width + Weight families:
+1. A single family, containing all combinations of Width & Weight locations. Example: There is a single [Noto Sans](https://github.com/notofonts/latin-greek-cyrillic) family which contains styles like `Condensed Medium` and `Expanded Light`. It has this organization of styles for both the variable and static fonts. This approach is typical of Google Fonts projects. In the Google Fonts approach, there is no distinction in family naming between variable and static fonts. The argument here is that it keeps things simple, in a way, as it reveals no distinction between static and variable fonts.
+2. Multiple families, split up by widths, each with weight styles. Example: [Frere-Jones Mallory](https://frerejones.com/families/mallory) includes subfamilies like `Mallory Condensed` and `Mallory Extended`, which in turn include styles like `Medium` and `Light`. This approach is typical of retail foundries, including many families listed on Adobe Fonts. Often, the variable font in such a family is given its own, separate family, e.g. `Mallory Variable`, which itself contains all styles, such as `Condensed Medium` and `Expanded Light`. In reality, these “subfamilies” are just different subdivisions of a single superfamily, but they can be a helpful way to give expert users easier access to the fonts and styles they want, especially in contexts where variable font features may be desired, or static font reliability may be preferred.
+
+The first approach is very simple to build with FontMake, from a Glyphs source with minimal configuration.
+
+The second approach is seemingly not possible to build with FontMake, from a Glyphs source, at the time being, even with the use of configurations that make such a build possible directly from Glyphs.
+
+- [ ] TODO: determine if Approach 2 is possible to build with FontMake, from a single `.designspace` file and UFO sources.
+
+So, the goal of this repo is to identify what, exactly, is preventing the second build from working.
+
+
+## Build Objective
+
+The objective is to use FontMake to build from a single Glyphs source to the following fonts:
+
+- A Variable font with all Width + Weight instances as styles in the `fvar` table, like:
+    - Familyname Variable 
+      - Condensed Regular
+      - Condensed Medium
+      - Condensed Bold
+      – Regular
+      - Medium
+      – Bold
+      – Wide Regular
+      – Wide Medium
+      – Wide Bold
+- Static fonts which are split into Width-based subfamilies, with weights inside, like:
+    - Familyname Condensed 
+      – Regular
+      - Medium
+      – Bold
+    - Familyname [Normal] 
+      – Regular
+      - Medium
+      – Bold
+    - Familyname Wide
+      – Regular
+      - Medium
+      – Bold
+
+## Tests
 
 Can FontMake produce accurate static OTFs and variable TTFs, with a width axis, from a single Glyphs source?
 
@@ -14,9 +64,8 @@ Main problem:
 - If I set Glyphs data to produce accurate variable TTF instance naming, like `Condensed Medium`, the CFF table of OTFs gets duplicated width desriptors, like `FamilynameCondensed-CondensedMedium`
 - If I set Glyphs data to procue accurate CFF table naming, like `FamilynameCondensed-Medium`, the variable font gets incorrect instance naming, with two instances called simply `Medium`
 
-FontMake (or GlyphsLib?) problems:
-1. The `Localized Family Name` and `Localized Style Name` properties of Glyphs Exports are sometimes ignored in building fonts.
-2. `name table entry` Custom Properties are ignored when building names in the CFF table of OTF fonts.
+Problems:
+1. The `Localized Family Name` and `Localized Style Name` properties of Glyphs Exports are sometimes (maybe always?) ignored in building fonts.
 
 Versions:
 - FontMake 3.9.0 (also occurs with 3.8.1)
