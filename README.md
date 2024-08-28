@@ -297,6 +297,38 @@ ttx -t fvar -o- fonts/test3/Familyname-VF.ttf
     </NamedInstance>
 ```
 
+## What, exactly, is going wrong?
+
+The main problem seems to be that the `Localized Style Names` property of Exports is ignored by glyphsLib.
+
+Can “Approach 1” be built from a single Designspace + UFOs? I *think* so, but I need to double-check this. If it can be, this problem may possible boil down to something manageable, such as:
+- [glyphsLib/issues/876](https://github.com/googlefonts/glyphsLib/issues/876) – glyphsLib is not producing `label` elements, which are used when building from a designspace
+- glyphsLib seems to convert the `Localized Family Name` custom parameter to the `familyname` attribute of a designspace instance element, but does not bring the `Localized Style Names` custom parameter into any attributes
+- FontMake is not using the `com.schriftgestaltung.properties` > `styleNames` of the lib in designspace instances, when it would be helpful for it to do so
+
+### Test 4: Designspace build
+
+I’ve converted from the `test-1-build-fontmake-glyphsapp.glyphs` to UFO sources via:
+
+``` 
+glyphs2ufo source/test-1-build-fontmake-glyphsapp.glyphs
+```
+
+Then, I changed the `<instance>` elements to have `stylename` attributes that match the `Localized Style Names` custom parameters of those Exports in the Glyphs source.
+
+I built with:
+
+```
+fontmake -o otf -i -m 'source/test-4-designspace-build/test-1-build-fontmake-glyphsapp.designspace' --output-dir fonts/test4
+fontmake -o variable -m 'source/test-4-designspace-build/test-1-build-fontmake-glyphsapp.designspace' --output-dir fonts/test4
+```
+
+This created the Static fonts with naming as desired, but gives the problem of repeated instance names in the variable `fvar` table.
+
+# To be continued!
+
+Next test: checking on whether `<label>` elements can solve the problem.
+
 ## Conclusion
 
 I might be doing something wrong, but after a lot of experimentation, it certainly seems like an issue in FontMake or GlyphsLib.
