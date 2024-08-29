@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <designspace format="5.0">
   <axes>
+    <axis tag="wdth" name="Width" minimum="50" maximum="100" default="100"/>
     <axis tag="wght" name="Weight" minimum="400" maximum="700" default="400">
       <map input="400" output="400"/>
       <map input="500" output="550"/>
       <map input="700" output="700"/>
     </axis>
-    <axis tag="wdth" name="Width" minimum="50" maximum="100" default="100"/>
   </axes>
   <sources>
     <source filename="Familyname-CondensedRegular.ufo" name="Familyname Condensed Regular" familyname="Familyname" stylename="Condensed Regular">

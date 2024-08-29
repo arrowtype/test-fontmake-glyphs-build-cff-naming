@@ -120,7 +120,7 @@ This looks good!
 Then, check a static font’s `name` tables with TTX:
 
 ```bash
-ttx -t name -o- 'fonts/test2/otf/FamilynameCondensed-Medium.otf'
+ttx -t name -o- 'fonts/test1/otf/FamilynameCondensed-Medium.otf'
 ```
 
 Some name entries are as expected, while others are not.
@@ -211,6 +211,8 @@ This yields correct NameIDs 1–17, but the CFF table is still incorrect. Here a
 
 A valid critique I’ve heard on this test is, essentially: “Why should ‘Name Table Entry’ parameters affect the CFF table? They are separate tables.” That is fair, but it also seems reasonable to assume that, because the CFF table refers to the font by a `name`, `FullName`, and `FamilyName`, these might be controllable by `Localized Family Name` and `Localized Style Name` properties, or (as a last resort) custom parameters such as `Name Table Entry` (especially because Glyphs offers no custom parameters such as “CFF Name Entry”).
 
+To be honest, I’m not sure how vital the information in the `CFF` table is. It seems probably important? Even if problems in the `CFF` table can be ignored, however, this build requires extensive additional setup for `Name Table Entry` custom parameters, which is a pretty big user burden, especially in complex Glyphs documents that include a lot of Exports.
+
 ### Test 3: Correcting static names messes up variable instance names
 
 What if we simplify the basic names of Exports in Glyphs? It works for static fonts, but not the variable font.
@@ -298,14 +300,7 @@ ttx -t fvar -o- fonts/test3/Familyname-VF.ttf
     </NamedInstance>
 ```
 
-## What, exactly, is going wrong?
-
-The main problem seems to be that the `Localized Style Names` property of Exports is ignored by glyphsLib.
-
-Can “Approach 1” be built from a single Designspace + UFOs? I *think* so, but I need to double-check this. If it can be, this problem may possible boil down to something manageable, such as:
-- [glyphsLib/issues/876](https://github.com/googlefonts/glyphsLib/issues/876) – glyphsLib is not producing `label` elements, which are used when building from a designspace
-- glyphsLib seems to convert the `Localized Family Name` custom parameter to the `familyname` attribute of a designspace instance element, but does not bring the `Localized Style Names` custom parameter into any attributes
-- FontMake is not using the `com.schriftgestaltung.properties` > `styleNames` of the lib in designspace instances, when it would be helpful for it to do so
+Let’s pivot to building from Designspace documents, to determine more precisely what glyphsLib would need to do to make these builds work as intended.
 
 ### Test 4: Designspace build with adjusted `stylename` attributes
 
@@ -325,9 +320,10 @@ fontmake -o variable -m 'source/test-4-designspace-build/test-4-build-fontmake.d
 ```
 
 Results:
-- Good: the static fonts now have naming as desired 
+- Good: the static fonts now have *most* naming set as desired 
+  - Bad: the static Condensed Bold font has a NameID 1 (Basic Font Family Name) of `Familyname Condensed Condensed`
 - Bad: the variable font has repeated instance names in the variable `fvar` table.
-- Bad: the variable font has barely anything in the `STAT` table
+- Bad: the variable font has barely anything in the `STAT` table. It has axes listed, but no location labels.
 
 ### Test 5: Designspace with only `<label>` elements added (stylenames not adjusted)
 
