@@ -1,6 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <designspace format="5.0">
   <axes>
+    <axis tag="wdth" name="Width" minimum="50" maximum="100" default="100">
+    <labels>
+      <label uservalue="50" name="Condensed" />
+      <label uservalue="100" name="Normal" elidable="true" />
+    </labels>
+    </axis>
     <axis tag="wght" name="Weight" minimum="400" maximum="700" default="400">
       <map input="400" output="400"/>
       <map input="500" output="550"/>
@@ -10,12 +16,6 @@
         <label uservalue="500" name="Medium" />
         <label uservalue="700" name="Bold" linkeduservalue="400" />
       </labels>
-    </axis>
-    <axis tag="wdth" name="Width" minimum="50" maximum="100" default="100">
-    <labels>
-      <label uservalue="50" name="Condensed" />
-      <label uservalue="100" name="Normal" elidable="true" />
-    </labels>
     </axis>
   </axes>
   <sources>
@@ -49,7 +49,7 @@
     </source>
   </sources>
   <instances>
-    <instance name="Familyname Condensed Condensed Regular" familyname="Familyname Condensed" stylename="Regular" filename="FamilynameCondensed-Regular.ufo">
+    <instance name="Familyname Condensed Condensed Regular" familyname="Familyname Condensed" stylename="Condensed Regular" filename="FamilynameCondensed-Regular.ufo">
       <location>
         <dimension name="Weight" xvalue="400"/>
         <dimension name="Width" xvalue="50"/>
@@ -99,7 +99,7 @@
         </dict>
       </lib>
     </instance>
-    <instance name="Familyname Condensed Condensed Medium" familyname="Familyname Condensed" stylename="Medium" filename="FamilynameCondensed-Medium.ufo">
+    <instance name="Familyname Condensed Condensed Medium" familyname="Familyname Condensed" stylename="Condensed Medium" filename="FamilynameCondensed-Medium.ufo">
       <location>
         <dimension name="Weight" xvalue="550"/>
         <dimension name="Width" xvalue="50"/>
@@ -151,7 +151,7 @@
         </dict>
       </lib>
     </instance>
-    <instance name="Familyname Condensed Condensed Bold" familyname="Familyname Condensed" stylename="Bold" filename="FamilynameCondensed-Bold.ufo" stylemapfamilyname="Familyname Condensed Condensed" stylemapstylename="bold">
+    <instance name="Familyname Condensed Condensed Bold" familyname="Familyname Condensed" stylename="Condensed Bold" filename="FamilynameCondensed-Bold.ufo" stylemapfamilyname="Familyname Condensed Condensed" stylemapstylename="bold">
       <location>
         <dimension name="Weight" xvalue="700"/>
         <dimension name="Width" xvalue="50"/>

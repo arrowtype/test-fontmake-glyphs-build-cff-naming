@@ -5,7 +5,7 @@ An earlier, draft issue was filed at [FontMake Issue #1108](https://github.com/g
 ### Test Conclusions
 
 With a couple of improvements to glyphsLib, font families with a Width axis could be built into “subfamilies” from Glyphs sources, using FontMake. Such subfamilies are typical of large family releases from retail foundries, and are supported by a direct Glyphs build, but not currently supported in a FontMake build. The two improvements that would unlock this are:
-1. Set `stylename` attributes based on `Localized Style Names` custom parameters. It seems like this might be relatively simple to fix...? (Hard to )
+1. Set `stylename`, `postscriptfontname`, and `stylemapfamilyname` attributes based on `Localized Family Names` and `Localized Style Names` Export properties. It seems that `Localized Family Names` is already being used, to an extent, which hopefully gives a head start on this set of improvements.
 2. Complete [open issue of creating labels](https://github.com/googlefonts/glyphsLib/issues/876). This seems like it may be a somewhat bigger lift, and possibly require work from the Glyphs team, as they use some special heurisitics to general the STAT table from implicit signals. Alternatively, if there were some way to set the labels explicity in custom parameters of Glyphs source, this could also work.
 
 ---
@@ -307,7 +307,7 @@ Can “Approach 1” be built from a single Designspace + UFOs? I *think* so, bu
 - glyphsLib seems to convert the `Localized Family Name` custom parameter to the `familyname` attribute of a designspace instance element, but does not bring the `Localized Style Names` custom parameter into any attributes
 - FontMake is not using the `com.schriftgestaltung.properties` > `styleNames` of the lib in designspace instances, when it would be helpful for it to do so
 
-### Test 4: Designspace build
+### Test 4: Designspace build with adjusted `stylename` attributes
 
 I’ve converted from the `test-1-build-fontmake-glyphsapp.glyphs` to UFO sources via:
 
@@ -328,19 +328,21 @@ Results:
 - Good: the static fonts now have naming as desired 
 - Bad: the variable font has repeated instance names in the variable `fvar` table.
 - Bad: the variable font has barely anything in the `STAT` table
- 
-# To be continued!
 
-Next test: checking on whether `<label>` elements can solve the problem.
+### Test 5: Designspace with only `<label>` elements added (stylenames not adjusted)
 
-Our Designspace now has two changes from what was generated in glyphs2ufo:
-1. `<instance>` elements to have `stylename` attributes have been updated to omit Width labels
-2. `<axis>` elements have now been given `<labels>` elements
+Next test: checking on whether `<label>` elements can solve the problem. This leaves `stylename` attributes alone.
 
 So, our axes now look like this:
 
 ```xml
   <axes>
+    <axis tag="wdth" name="Width" minimum="50" maximum="100" default="100">
+      <labels>
+        <label uservalue="50" name="Condensed" />
+        <label uservalue="100" name="Normal" elidable="true" />
+      </labels>
+    </axis>
     <axis tag="wght" name="Weight" minimum="400" maximum="700" default="400">
       <map input="400" output="400"/>
       <map input="500" output="550"/>
@@ -351,16 +353,10 @@ So, our axes now look like this:
         <label uservalue="700" name="Bold" linkeduservalue="400" />
       </labels>
     </axis>
-    <axis tag="wdth" name="Width" minimum="50" maximum="100" default="100">
-    <labels>
-      <label uservalue="50" name="Condensed" />
-      <label uservalue="100" name="Normal" elidable="true" />
-    </labels>
-    </axis>
   </axes>
 ```
 
-This test can be built with these commands:
+The fonts are build with these commands:
 
 ```
 fontmake -o otf -i -m 'source/test-5-designspace-build/test-5-build-fontmake.designspace' --output-dir fonts/test5
@@ -368,12 +364,58 @@ fontmake -o variable -m 'source/test-5-designspace-build/test-5-build-fontmake.d
 ```
 
 Results:
+- Good: the variable font has a full `STAT` table
+- Good: the variable font has distinct style names in the `fvar` table
+- Bad: the static fonts still have `name` table issues. 
+  - NameID 1 (Basic Font Family Name) is `Familyname Condensed Condensed` in Familyname Condensed Bold (due to style linking)
+  - NameID 4 (Full Name) is `Familyname Condensed Condensed Medium` (the Width label is repeated, as it is in the `familyname` and `stylename` attributes of instances)
+  - NameID 6 (PostScript Name) is `Familyname-CondensedMedium` (the Width label is on the wrong side of the hyphen)
+  - NameID 16 (Typographic Style Name) is `Familyname Condensed` (good) but NameID 17 (Typographic Style Name) is `Condensed Medium` (the Width label is repeated)
+
+
+### Test 6: Designspace build with `<label>` elements added, `postscriptfontname` added, `stylenames` corrected, and `stylemapfamilyname` corrected
+
+Final test: determining which designspace edits are required to build the desired fonts.
+
+Our Designspace now has four changes from what was generated by `glyphs2ufo`:
+1. `<axis>` elements have now been given `<labels>` elements
+2. `<instance>` elements `stylename` attributes have been updated to omit Width labels
+3. `<instance>` elements `postscriptfontname` attributes have been added
+4. `<instance>` element `stylemapfamilyname` attributes have been corrected to avoid doubled Width labels
+
+Instances elements are given corrected `stylename` attributes. Two notes on this:
+- `name` attributes are left alone, even though they are not what is expected or desired, because this does not seem to affect the built fonts.
+- `filename` attributes are only correct because `fileName` custom parameters are set in Glyphs Exports. If left out, filename attributes will look like `filename="FamilynameCondensed-CondensedRegular.ufo"`
+
+For example, here is a before/after diff on one instance:
+
+```diff
+- <instance name="Familyname Condensed Condensed Regular" familyname="Familyname Condensed" stylename="Condensed Regular" filename="FamilynameCondensed-Regular.ufo">
++ <instance name="Familyname Condensed Condensed Regular" familyname="Familyname Condensed" stylename="Regular" filename="FamilynameCondensed-Regular.ufo" postscriptfontname="FamilynameCondensed-Regular">
+```
+
+Here’s the before/after diff on the Condensed Bold instance:
+
+```diff
+- <instance name="Familyname Condensed Condensed Bold" familyname="Familyname Condensed" stylename="Condensed Bold" filename="FamilynameCondensed-Bold.ufo" stylemapfamilyname="Familyname Condensed Condensed" stylemapstylename="bold">
++ <instance name="Familyname Condensed Condensed Bold" familyname="Familyname Condensed" stylename="Bold" filename="FamilynameCondensed-Bold.ufo" stylemapfamilyname="Familyname Condensed" stylemapstylename="bold" postscriptfontname="FamilynameCondensed-Bold" >
+```
+
+This test can be built with these commands:
+
+```
+fontmake -o otf -i -m 'source/test-6-designspace-build/test-6-build-fontmake.designspace' --output-dir fonts/test6
+fontmake -o variable -m 'source/test-6-designspace-build/test-6-build-fontmake.designspace' --output-dir fonts/test6
+```
+
+Results:
 - Good: the Static fonts now have naming as desired 
 - Good: the variable font has distinct style names in the `fvar` table
 - Good: the variable font has a full `STAT` table
 
+
 ## Conclusion
 
 With a couple of improvements, this problem could probably be solved in glyphsLib:
-1. Set `stylename` attributes based on `Localized Style Names` custom parameters. It seems like this might be relatively simple to fix...? (Hard to )
+1. Set `stylename`, `postscriptfontname`, and `stylemapfamilyname` attributes based on `Localized Family Names` and `Localized Style Names` Export properties. It seems that `Localized Family Names` is already being used, to an extent, which hopefully gives a head start on this set of improvements.
 2. Complete [open issue of creating labels](https://github.com/googlefonts/glyphsLib/issues/876). This seems like it may be a somewhat bigger lift, and possibly require work from the Glyphs team, as they use some special heurisitics to general the STAT table from implicit signals. Alternatively, if there were some way to set the labels explicity in custom parameters of Glyphs source, this could also work.

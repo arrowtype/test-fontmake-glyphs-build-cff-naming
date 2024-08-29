@@ -1,0 +1,326 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<designspace format="5.0">
+  <axes>
+    <axis tag="wdth" name="Width" minimum="50" maximum="100" default="100"/>
+    <axis tag="wght" name="Weight" minimum="400" maximum="700" default="400">
+      <map input="400" output="400"/>
+      <map input="500" output="550"/>
+      <map input="700" output="700"/>
+    </axis>
+  </axes>
+  <sources>
+    <source filename="Familyname-CondensedRegular.ufo" name="Familyname Condensed Regular" familyname="Familyname" stylename="Condensed Regular">
+      <location>
+        <dimension name="Width" xvalue="50"/>
+        <dimension name="Weight" xvalue="400"/>
+      </location>
+    </source>
+    <source filename="Familyname-CondensedBold.ufo" name="Familyname Condensed Bold" familyname="Familyname" stylename="Condensed Bold">
+      <location>
+        <dimension name="Width" xvalue="50"/>
+        <dimension name="Weight" xvalue="700"/>
+      </location>
+    </source>
+    <source filename="Familyname-Regular.ufo" name="Familyname Regular" familyname="Familyname" stylename="Regular">
+      <lib copy="1"/>
+      <groups copy="1"/>
+      <features copy="1"/>
+      <info copy="1"/>
+      <location>
+        <dimension name="Width" xvalue="100"/>
+        <dimension name="Weight" xvalue="400"/>
+      </location>
+    </source>
+    <source filename="Familyname-Bold.ufo" name="Familyname Bold" familyname="Familyname" stylename="Bold">
+      <location>
+        <dimension name="Width" xvalue="100"/>
+        <dimension name="Weight" xvalue="700"/>
+      </location>
+    </source>
+  </sources>
+  <instances>
+    <instance name="Familyname Condensed Condensed Regular" familyname="Familyname Condensed" stylename="Condensed Regular" filename="instance_ufos/FamilynameCondensed-CondensedRegular.ufo">
+      <location>
+        <dimension name="Width" xvalue="50"/>
+        <dimension name="Weight" xvalue="400"/>
+      </location>
+      <lib>
+        <dict>
+          <key>com.schriftgestaltung.customParameters</key>
+          <array>
+            <array>
+              <string>Axis Location</string>
+              <array>
+                <dict>
+                  <key>Axis</key>
+                  <string>Weight</string>
+                  <key>Location</key>
+                  <integer>400</integer>
+                </dict>
+                <dict>
+                  <key>Axis</key>
+                  <string>Width</string>
+                  <key>Location</key>
+                  <integer>50</integer>
+                </dict>
+              </array>
+            </array>
+          </array>
+          <key>com.schriftgestaltung.export</key>
+          <true/>
+          <key>com.schriftgestaltung.intanceInterpolations</key>
+          <dict>
+            <key>m01</key>
+            <integer>1</integer>
+          </dict>
+          <key>com.schriftgestaltung.manualInterpolation</key>
+          <false/>
+          <key>com.schriftgestaltung.properties</key>
+          <array>
+            <array>
+              <string>styleNames</string>
+              <string>Regular</string>
+            </array>
+          </array>
+          <key>com.schriftgestaltung.weight</key>
+          <string>Regular</string>
+          <key>com.schriftgestaltung.width</key>
+          <integer>3</integer>
+        </dict>
+      </lib>
+    </instance>
+    <instance name="Familyname Condensed Condensed Medium" familyname="Familyname Condensed" stylename="Condensed Medium" filename="instance_ufos/FamilynameCondensed-CondensedMedium.ufo">
+      <location>
+        <dimension name="Width" xvalue="50"/>
+        <dimension name="Weight" xvalue="550"/>
+      </location>
+      <lib>
+        <dict>
+          <key>com.schriftgestaltung.customParameters</key>
+          <array>
+            <array>
+              <string>Axis Location</string>
+              <array>
+                <dict>
+                  <key>Axis</key>
+                  <string>Weight</string>
+                  <key>Location</key>
+                  <integer>500</integer>
+                </dict>
+                <dict>
+                  <key>Axis</key>
+                  <string>Width</string>
+                  <key>Location</key>
+                  <integer>50</integer>
+                </dict>
+              </array>
+            </array>
+          </array>
+          <key>com.schriftgestaltung.export</key>
+          <true/>
+          <key>com.schriftgestaltung.intanceInterpolations</key>
+          <dict>
+            <key>m003</key>
+            <real>0.5</real>
+            <key>m01</key>
+            <real>0.5</real>
+          </dict>
+          <key>com.schriftgestaltung.manualInterpolation</key>
+          <false/>
+          <key>com.schriftgestaltung.properties</key>
+          <array>
+            <array>
+              <string>styleNames</string>
+              <string>Medium</string>
+            </array>
+          </array>
+          <key>com.schriftgestaltung.weight</key>
+          <integer>500</integer>
+          <key>com.schriftgestaltung.width</key>
+          <integer>3</integer>
+        </dict>
+      </lib>
+    </instance>
+    <instance name="Familyname Condensed Condensed Bold" familyname="Familyname Condensed" stylename="Condensed Bold" filename="instance_ufos/FamilynameCondensed-CondensedBold.ufo" stylemapfamilyname="Familyname Condensed Condensed" stylemapstylename="bold">
+      <location>
+        <dimension name="Width" xvalue="50"/>
+        <dimension name="Weight" xvalue="700"/>
+      </location>
+      <lib>
+        <dict>
+          <key>com.schriftgestaltung.customParameters</key>
+          <array>
+            <array>
+              <string>Axis Location</string>
+              <array>
+                <dict>
+                  <key>Axis</key>
+                  <string>Weight</string>
+                  <key>Location</key>
+                  <integer>700</integer>
+                </dict>
+                <dict>
+                  <key>Axis</key>
+                  <string>Width</string>
+                  <key>Location</key>
+                  <integer>50</integer>
+                </dict>
+              </array>
+            </array>
+          </array>
+          <key>com.schriftgestaltung.export</key>
+          <true/>
+          <key>com.schriftgestaltung.intanceInterpolations</key>
+          <dict>
+            <key>m003</key>
+            <integer>1</integer>
+          </dict>
+          <key>com.schriftgestaltung.manualInterpolation</key>
+          <false/>
+          <key>com.schriftgestaltung.properties</key>
+          <array>
+            <array>
+              <string>styleNames</string>
+              <string>Bold</string>
+            </array>
+          </array>
+          <key>com.schriftgestaltung.weight</key>
+          <integer>700</integer>
+          <key>com.schriftgestaltung.width</key>
+          <integer>3</integer>
+        </dict>
+      </lib>
+    </instance>
+    <instance name="Familyname Regular" familyname="Familyname" stylename="Regular" filename="instance_ufos/Familyname-Regular.ufo">
+      <location>
+        <dimension name="Width" xvalue="100"/>
+        <dimension name="Weight" xvalue="400"/>
+      </location>
+      <lib>
+        <dict>
+          <key>com.schriftgestaltung.customParameters</key>
+          <array>
+            <array>
+              <string>Axis Location</string>
+              <array>
+                <dict>
+                  <key>Axis</key>
+                  <string>Weight</string>
+                  <key>Location</key>
+                  <integer>400</integer>
+                </dict>
+                <dict>
+                  <key>Axis</key>
+                  <string>Width</string>
+                  <key>Location</key>
+                  <integer>100</integer>
+                </dict>
+              </array>
+            </array>
+          </array>
+          <key>com.schriftgestaltung.export</key>
+          <true/>
+          <key>com.schriftgestaltung.intanceInterpolations</key>
+          <dict>
+            <key>m002</key>
+            <integer>1</integer>
+          </dict>
+          <key>com.schriftgestaltung.manualInterpolation</key>
+          <false/>
+          <key>com.schriftgestaltung.weight</key>
+          <string>Regular</string>
+          <key>com.schriftgestaltung.width</key>
+          <string>Medium (normal)</string>
+        </dict>
+      </lib>
+    </instance>
+    <instance name="Familyname Medium" familyname="Familyname" stylename="Medium" filename="instance_ufos/Familyname-Medium.ufo">
+      <location>
+        <dimension name="Width" xvalue="100"/>
+        <dimension name="Weight" xvalue="550"/>
+      </location>
+      <lib>
+        <dict>
+          <key>com.schriftgestaltung.customParameters</key>
+          <array>
+            <array>
+              <string>Axis Location</string>
+              <array>
+                <dict>
+                  <key>Axis</key>
+                  <string>Weight</string>
+                  <key>Location</key>
+                  <integer>500</integer>
+                </dict>
+                <dict>
+                  <key>Axis</key>
+                  <string>Width</string>
+                  <key>Location</key>
+                  <integer>100</integer>
+                </dict>
+              </array>
+            </array>
+          </array>
+          <key>com.schriftgestaltung.export</key>
+          <true/>
+          <key>com.schriftgestaltung.intanceInterpolations</key>
+          <dict>
+            <key>m002</key>
+            <real>0.5</real>
+            <key>m004</key>
+            <real>0.5</real>
+          </dict>
+          <key>com.schriftgestaltung.manualInterpolation</key>
+          <false/>
+          <key>com.schriftgestaltung.weight</key>
+          <integer>500</integer>
+          <key>com.schriftgestaltung.width</key>
+          <string>Medium (normal)</string>
+        </dict>
+      </lib>
+    </instance>
+    <instance name="Familyname Bold" familyname="Familyname" stylename="Bold" filename="instance_ufos/Familyname-Bold.ufo" stylemapfamilyname="Familyname" stylemapstylename="bold">
+      <location>
+        <dimension name="Width" xvalue="100"/>
+        <dimension name="Weight" xvalue="700"/>
+      </location>
+      <lib>
+        <dict>
+          <key>com.schriftgestaltung.customParameters</key>
+          <array>
+            <array>
+              <string>Axis Location</string>
+              <array>
+                <dict>
+                  <key>Axis</key>
+                  <string>Weight</string>
+                  <key>Location</key>
+                  <integer>700</integer>
+                </dict>
+                <dict>
+                  <key>Axis</key>
+                  <string>Width</string>
+                  <key>Location</key>
+                  <integer>100</integer>
+                </dict>
+              </array>
+            </array>
+          </array>
+          <key>com.schriftgestaltung.export</key>
+          <true/>
+          <key>com.schriftgestaltung.intanceInterpolations</key>
+          <dict>
+            <key>m004</key>
+            <integer>1</integer>
+          </dict>
+          <key>com.schriftgestaltung.manualInterpolation</key>
+          <false/>
+          <key>com.schriftgestaltung.weight</key>
+          <integer>700</integer>
+          <key>com.schriftgestaltung.width</key>
+          <string>Medium (normal)</string>
+        </dict>
+      </lib>
+    </instance>
+  </instances>
+</designspace>
