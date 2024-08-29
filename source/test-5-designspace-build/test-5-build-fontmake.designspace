@@ -6,7 +6,7 @@
       <map input="500" output="550"/>
       <map input="700" output="700"/>
       <labels>
-        <label uservalue="400" name="Regular" elidable="true" />
+        <label uservalue="400" name="Regular" />
         <label uservalue="500" name="Medium" />
         <label uservalue="700" name="Bold" linkeduservalue="400" />
       </labels>

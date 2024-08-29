@@ -370,12 +370,11 @@ Results:
 - Good: the Static fonts now have naming as desired 
 - Good: the variable font has distinct style names in the `fvar` table
 - Good: the variable font has a full `STAT` table
-- Badish: the `elidable` attribute of the "Normal" and "Regular" labels result in some blanks in the name table. This could probably be mostly fixed by adding `postscriptfontname` attributes to instance elements.
 
 ## Conclusion
 
 With a couple of tweaks, this problem could probably be solved in glyphsLib.
 1. Set stylename attributes based on `Localized Style Names` custom parameters
-2. Complete [open issue of creating labels](https://github.com/googlefonts/glyphsLib/issues/876)
+2. Complete [open issue of creating labels](https://github.com/googlefonts/glyphsLib/issues/876). Alternatively, if there is some way to set the labels explicity in custom parametes, it might work.
 
 And make sure setting explicit PostScipt names in Glyphs Exports also carries over to a designspace.
