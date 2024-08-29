@@ -1,8 +1,12 @@
 # Test: Can FontMake build from Glyphs to multiple families, static & variable? If not, what is blocking it?
 
-[WIP test case for a planned glyphsLib issue]
+An earlier, draft issue was filed at [FontMake Issue #1108](https://github.com/googlefonts/fontmake/issues/1108). This repo was created and used to clarify that issue, ultimately as a step towards solving it.
 
-An earlier, partial issue was filed at [FontMake Issue #1108](https://github.com/googlefonts/fontmake/issues/1108), but this intends to clarify that issue, ultimately as a step towards solving it.
+### Test Conclusions
+
+With a couple of improvements to glyphsLib, font families with a Width axis could be built into “subfamilies” from Glyphs sources, using FontMake. Such subfamilies are typical of large family releases from retail foundries, and are supported by a direct Glyphs build, but not currently supported in a FontMake build. The two improvements that would unlock this are:
+1. Set `stylename` attributes based on `Localized Style Names` custom parameters. It seems like this might be relatively simple to fix...? (Hard to )
+2. Complete [open issue of creating labels](https://github.com/googlefonts/glyphsLib/issues/876). This seems like it may be a somewhat bigger lift, and possibly require work from the Glyphs team, as they use some special heurisitics to general the STAT table from implicit signals. Alternatively, if there were some way to set the labels explicity in custom parameters of Glyphs source, this could also work.
 
 ---
 
@@ -14,12 +18,9 @@ There are two basic ways of organizing Width + Weight families:
 
 The first approach is very simple to build with FontMake, from a Glyphs source with minimal configuration.
 
-The second approach is seemingly not possible to build with FontMake, from a Glyphs source, at the time being, even with the use of configurations that make such a build possible directly from Glyphs.
+The second approach is seemingly not possible to build with FontMake, from a Glyphs source, at the time being, even with the use of configurations that make such a build possible directly from Glyphs. It *is* possible to build from a single v5 Designspace, however, so getting there seems to be a matter of making a couple of improvments to glyphsLib.
 
-- [ ] TODO: determine if Approach 2 is possible to build with FontMake, from a single `.designspace` file and UFO sources.
-
-So, the goal of this repo is to identify what, exactly, is preventing the second build from working.
-
+So, the goal of this repo was to identify what, exactly, is preventing the second build from working.
 
 ## Build Objective
 
@@ -373,8 +374,6 @@ Results:
 
 ## Conclusion
 
-With a couple of tweaks, this problem could probably be solved in glyphsLib.
-1. Set stylename attributes based on `Localized Style Names` custom parameters
-2. Complete [open issue of creating labels](https://github.com/googlefonts/glyphsLib/issues/876). Alternatively, if there is some way to set the labels explicity in custom parametes, it might work.
-
-And make sure setting explicit PostScipt names in Glyphs Exports also carries over to a designspace.
+With a couple of improvements, this problem could probably be solved in glyphsLib:
+1. Set `stylename` attributes based on `Localized Style Names` custom parameters. It seems like this might be relatively simple to fix...? (Hard to )
+2. Complete [open issue of creating labels](https://github.com/googlefonts/glyphsLib/issues/876). This seems like it may be a somewhat bigger lift, and possibly require work from the Glyphs team, as they use some special heurisitics to general the STAT table from implicit signals. Alternatively, if there were some way to set the labels explicity in custom parameters of Glyphs source, this could also work.
