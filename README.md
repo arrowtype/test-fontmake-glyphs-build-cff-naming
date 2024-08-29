@@ -319,17 +319,61 @@ Then, I changed the `<instance>` elements to have `stylename` attributes that ma
 I built with:
 
 ```
-fontmake -o otf -i -m 'source/test-4-designspace-build/test-1-build-fontmake-glyphsapp.designspace' --output-dir fonts/test4
-fontmake -o variable -m 'source/test-4-designspace-build/test-1-build-fontmake-glyphsapp.designspace' --output-dir fonts/test4
+fontmake -o otf -i -m 'source/test-4-designspace-build/test-4-build-fontmake.designspace' --output-dir fonts/test4
+fontmake -o variable -m 'source/test-4-designspace-build/test-4-build-fontmake.designspace' --output-dir fonts/test4
 ```
 
-This created the Static fonts with naming as desired, but gives the problem of repeated instance names in the variable `fvar` table.
-
+Results:
+- Good: the static fonts now have naming as desired 
+- Bad: the variable font has repeated instance names in the variable `fvar` table.
+- Bad: the variable font has barely anything in the `STAT` table
+ 
 # To be continued!
 
 Next test: checking on whether `<label>` elements can solve the problem.
 
+Our Designspace now has two changes from what was generated in glyphs2ufo:
+1. `<instance>` elements to have `stylename` attributes have been updated to omit Width labels
+2. `<axis>` elements have now been given `<labels>` elements
+
+So, our axes now look like this:
+
+```xml
+  <axes>
+    <axis tag="wght" name="Weight" minimum="400" maximum="700" default="400">
+      <map input="400" output="400"/>
+      <map input="500" output="550"/>
+      <map input="700" output="700"/>
+      <labels>
+        <label uservalue="400" name="Regular" elidable="true" />
+        <label uservalue="500" name="Medium" />
+        <label uservalue="700" name="Bold" linkeduservalue="400" />
+      </labels>
+    </axis>
+    <axis tag="wdth" name="Width" minimum="50" maximum="100" default="100">
+    <labels>
+      <label uservalue="50" name="Condensed" />
+      <label uservalue="100" name="Normal" elidable="true" />
+    </labels>
+    </axis>
+  </axes>
+```
+
+This test can be built with these commands:
+
+```
+fontmake -o otf -i -m 'source/test-5-designspace-build/test-5-build-fontmake.designspace' --output-dir fonts/test5
+fontmake -o variable -m 'source/test-5-designspace-build/test-5-build-fontmake.designspace' --output-dir fonts/test5
+```
+
+Results:
+- Good: the Static fonts now have naming as desired 
+- Good: the variable font has distinct style names in the `fvar` table
+- 
+
 ## Conclusion
+
+
 
 I might be doing something wrong, but after a lot of experimentation, it certainly seems like an issue in FontMake or GlyphsLib.
 
